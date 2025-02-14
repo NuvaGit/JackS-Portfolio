@@ -1,0 +1,29 @@
+[
+  {
+    "role": "Freelance VFX Aritst",
+    "organisation": "Self Employed",
+    "startDate": "2018",
+    "endDate": "2020",
+    "experiences": ["Created engaging thumbnails", "Edited videos with Adobe After Effects"],
+    "imageSrc": ""
+  }, 
+  {
+    "role": "ICT Intern",
+    "organisation": "Kerry Group",
+    "startDate": "May, 2023",
+    "endDate": "Aug, 2023",
+    "experiences": ["Worked with PHP", "Designed login portals"],
+    "imageSrc": "history/kerrygroup.png"
+  },
+  {
+    "role": "Software Enginner Intern",
+    "organisation": "Canada Life",
+    "startDate": "March, 2024",
+    "endDate": "August, 2024",
+    "experiences": [
+      "Worked with spring boot and angular",
+      "Helped Create a customer chatbot"
+    ],
+    "imageSrc": "history/cle1.png"
+  }
+]

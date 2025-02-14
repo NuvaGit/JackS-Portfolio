@@ -1,0 +1,34 @@
+[
+  {
+    "title": "Trading Bot",
+    "imageSrc": "projects/project.png",
+    "description": " Python-based trading bot, Implements machine learning to predict prices",
+    "skills": ["Python", "Machine Learning"],
+    "demo": "https://www.example.com",
+    "source": "https://github.com/NuvaGit/TradingBot"
+  },
+  {
+    "title": "Ecommerce Store",
+    "imageSrc": "projects/project.png",
+    "description": "This is a project made to learn the latest languages by building an app.",
+    "skills": ["React", "Express", "Node", "Sass"],
+    "demo": "https://www.example.com",
+    "source": "https://github.com/NuvaGit/EcommerceSoringBoot"
+  },
+  {
+    "title": "Quest Game",
+    "imageSrc": "projects/project.png",
+    "description": "Quest Game implemented in java",
+    "skills": ["Java", "Java Swing", "OOP"],
+    "demo": "https://www.example.com",
+    "source": "https://github.com/NuvaGit/QuestGame"
+  },
+  {
+    "title": "Trigger Bot",
+    "imageSrc": "projects/project.png",
+    "description": "Trigger bot for use in any game",
+    "skills": ["Python","Image","Testing"],
+    "demo": "https://www.example.com",
+    "source": "https://github.com/NuvaGit/triggerbot/blob/main/trigger.py"
+  }
+]

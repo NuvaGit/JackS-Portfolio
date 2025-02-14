@@ -1,0 +1,11 @@
+:root {
+  /* Colors */
+  --color-text: #ffffff; /* Keep text white for contrast */
+  --color-primary: #a83232; /* Darker, deeper red for primary color */
+  --color-secondary: #732626; /* Slightly darker shade for secondary elements */
+  --color-dark: #4d1f1f; /* Dark red-black, to replace darker background elements */
+  --color-bg: #2b1a1a; /* Reddish black for main background color */
+
+  /* Fonts */
+  --font-roboto: "Roboto", sans-serif;
+}
