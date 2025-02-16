@@ -24,11 +24,11 @@
     "source": "https://github.com/NuvaGit/QuestGame"
   },
   {
-    "title": "Trigger Bot",
+    "title": "Messaging Service",
     "imageSrc": "projects/project.png",
-    "description": "Trigger bot for use in any game",
-    "skills": ["Python","Image","Testing"],
-    "demo": "https://www.example.com",
-    "source": "https://github.com/NuvaGit/triggerbot/blob/main/trigger.py"
+    "description": "Private Messaging, Group Chat Video call",
+    "skills": ["Node.js","MongoDB","Deployments"],
+    "demo": "https://nuvagit.github.io/securegroupchat-frontend/",
+    "source": "https://github.com/NuvaGit/securegroupchat-frontend"
   }
 ]
