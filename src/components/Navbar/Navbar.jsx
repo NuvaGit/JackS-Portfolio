@@ -40,7 +40,7 @@ export const Navbar = () => {
           </li>
           <li>
          <a
-  href="/JackS-Portfolio/game"
+  href="https://nuvagit.github.io/JackS-Portfolio/game"
   target="_blank"
   rel="noopener noreferrer"
 >
