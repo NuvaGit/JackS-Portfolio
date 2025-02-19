@@ -39,14 +39,7 @@ export const Navbar = () => {
             <a href="/JackS-Portfolio/#contact">Contact</a>
           </li>
           <li>
-          <a
-  href="/JackS-Portfolio/game"
-  target="_blank"
-  rel="noopener noreferrer"
->
-  Game
-</a>
-
+          <a href="/JackS-Portfolio/game"rel="noopener noreferrer">Game</a>
           </li>
         </ul>
       </div>
