@@ -21,7 +21,7 @@ function App() {
             <Projects />
             <Contact />
           </>} />
-          <Route path="/game" element={<Game />} /> {/* Game route */}
+          <Route path="/game" element={<Game />} /> 
         </Routes>
       </div>
     </Router>

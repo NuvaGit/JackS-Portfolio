@@ -33,7 +33,7 @@ export const Navbar = () => {
             <a href="/JackS-Portfolio/#experience">Experience</a>
           </li>
           <li>
-            <a href="/JackS-Portfolio/#projects">Projects</a>
+            <a href="/JackS-Portfolio/game">Game</a>
           </li>
           <li>
             <a href="/JackS-Portfolio/#contact">Contact</a>
