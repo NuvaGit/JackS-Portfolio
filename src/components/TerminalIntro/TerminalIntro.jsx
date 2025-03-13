@@ -19,17 +19,16 @@ const TerminalIntro = ({ onComplete }) => {
     "                                                                                                 "
   ];
 
-  // Matrix-style character rain effect
   const initMatrix = () => {
     const width = window.innerWidth;
-    const cols = Math.floor(width / 20); // Fewer columns for clarity
+    const cols = Math.floor(width / 20); 
     const chars = [];
     
     for (let i = 0; i < cols; i++) {
       chars.push({
         x: i,
         y: Math.floor(Math.random() * -20),
-        speed: 0.3 + Math.random() * 1, // Slower speed for better readability
+        speed: 0.3 + Math.random() * 1, // speed
         char: getRandomChar()
       });
     }
@@ -48,7 +47,6 @@ const TerminalIntro = ({ onComplete }) => {
         // Update y position
         const newY = char.y + char.speed;
         
-        // Reset if it goes off screen
         if (newY > 40) {
           return {
             ...char,
@@ -58,7 +56,6 @@ const TerminalIntro = ({ onComplete }) => {
           };
         }
         
-        // Randomly change characters
         const newChar = Math.random() > 0.95 ? getRandomChar() : char.char;
         
         return {
@@ -70,8 +67,7 @@ const TerminalIntro = ({ onComplete }) => {
     );
   };
 
-  // Type text with a terminal-like effect
-  const typeText = (text, callback, speed = 30) => {
+  const typeText = (text, callback, speed = 30) => { 
     let i = 0;
     setCurrentLine('');
     
@@ -85,32 +81,27 @@ const TerminalIntro = ({ onComplete }) => {
           setLines(prev => [...prev, text]);
           setCurrentLine('');
           if (callback) callback();
-        }, 300);
+        }, 700); 
       }
     }, speed);
   };
 
-  // Display ASCII art with proper formatting
   const showAsciiArt = (callback) => {
-    // Add the ASCII art directly to the lines, no typing animation for art
     setLines(prev => [...prev, ...nameAscii]);
-    setTimeout(callback, 1000);
+    setTimeout(callback, 2500); 
   };
 
-  // Matrix effect timer
   useEffect(() => {
     if (showMatrix) {
-      const interval = setInterval(updateMatrix, 150); // Slower update for better performance
+      const interval = setInterval(updateMatrix, 150);
       return () => clearInterval(interval);
     }
   }, [showMatrix, matrixChars]);
 
-  // Initialize matrix characters
   useEffect(() => {
     initMatrix();
   }, []);
 
-  // Cursor blinking effect
   useEffect(() => {
     const cursorInterval = setInterval(() => {
       setShowCursor(prev => !prev);
@@ -119,75 +110,78 @@ const TerminalIntro = ({ onComplete }) => {
     return () => clearInterval(cursorInterval);
   }, []);
 
-  // Auto scroll to bottom
-  useEffect(() => {
-    if (terminalRef.current) {
-      terminalRef.current.scrollTop = terminalRef.current.scrollHeight;
-    }
-  }, [lines, currentLine]);
 
-  // Run the animation sequence
+
   useEffect(() => {
     const runAnimation = async () => {
       setShowMatrix(true);
       
-      // Wait for matrix effect to run for a moment
       setTimeout(() => {
-        // Start terminal sequence
         typeText('$ whoami', () => {
-          typeText('jack@kali', () => {
-            typeText('$ cd ~/portfolio', () => {
-              typeText('$ ls -la', () => {
-                typeText('-rw-r--r-- 1 jack users  495 Mar 12 10:38 README.md', () => {
-                  typeText('-rw-r--r-- 1 jack users 12853 Mar 12 10:40 portfolio.js', () => {
-                    typeText('$ node portfolio.js', () => {
-                      showAsciiArt(() => {
-                        typeText('Computer Science Student at UCD', () => {
-                          typeText('Looking for Work in FinTech', () => {
-                            typeText('$ sudo run booting-portfolio...', () => {
-                              typeText('Loading assets: [████████████████████] 100%', () => {
-                                // Exit prompt after 10 seconds total
-                                setTimeout(() => {
-                                  typeText('Are you sure you want to exit? [Y/n]', () => {
-                                    setTimeout(() => {
-                                      setCurrentLine('Y');
-                                      setTimeout(() => {
-                                        setLines(prev => [...prev, 'Y']);
-                                        setCurrentLine('');
-                                        setTimeout(() => {
-                                          typeText('Exiting terminal...', () => {
-                                            // End animation and load portfolio
-                                            setTimeout(() => {
-                                              onComplete();
-                                            }, 500);
+          setTimeout(() => { 
+            typeText('jack@kali', () => {
+              setTimeout(() => { 
+                typeText('$ cd ~/portfolio', () => {
+                  setTimeout(() => { 
+                    typeText('$ ls -la', () => {
+                      setTimeout(() => { 
+                        typeText('-rw-r--r-- 1 jack users  495 Mar 12 10:38 README.md', () => {
+                          setTimeout(() => { 
+                            typeText('-rw-r--r-- 1 jack users 12853 Mar 12 10:40 portfolio.js', () => {
+                              setTimeout(() => { 
+                                typeText('$ node portfolio.js', () => {
+                                  setTimeout(() => { 
+                                    showAsciiArt(() => {
+                                      typeText('Computer Science Student at UCD', () => {
+                                        typeText('Looking for Work in FinTech', () => {
+                                          typeText('$ sudo run booting-portfolio...', () => {
+                                            typeText('Loading assets: [████████████████████] 100%', () => {
+                                              
+                                              setTimeout(() => {
+                                                typeText('Are you sure you want to exit? [Y/n]', () => {
+                                                  setTimeout(() => {
+                                                    setCurrentLine('Y');
+                                                    setTimeout(() => {
+                                                      setLines(prev => [...prev, 'Y']);
+                                                      setCurrentLine('');
+                                                      setTimeout(() => {
+                                                        typeText('Exiting terminal...', () => {
+                                                          setTimeout(() => {
+                                                            onComplete();
+                                                          }, 800);
+                                                        });
+                                                      }, 500);
+                                                    }, 500);
+                                                  }, 800);
+                                                });
+                                              }, 1500);
+                                            });
                                           });
-                                        }, 300);
-                                      }, 300);
-                                    }, 500);
-                                  });
-                                }, 1500); // This timing ensures 10 seconds before exit prompt
-                              });
+                                        });
+                                      });
+                                    });
+                                  }, 800); // Added delay
+                                });
+                              }, 800); // Added delay
                             });
-                          });
+                          }, 800); // Added delay
                         });
-                      });
+                      }, 800); // Added delay
                     });
-                  });
+                  }, 800); // Added delay
                 });
-              });
+              }, 800); // Added delay
             });
-          });
+          }, 800); 
         });
-      }, 1000);
+      }, 1500); 
     };
 
-    // Start the animation after a brief delay
-    setTimeout(runAnimation, 500);
+    setTimeout(runAnimation, 1000);
     
-    // Timer to transition to portfolio after 10 seconds
     setTimeout(() => {
       onComplete();
-    }, 10000); // 10 seconds
+    }, 20000); 
     
   }, []);
 
@@ -212,7 +206,7 @@ const TerminalIntro = ({ onComplete }) => {
                 style={{
                   left: `${char.x * 20}px`,
                   top: `${char.y * 20}px`,
-                  opacity: Math.min(0.5, Math.max(0, (20 - char.y) / 40)) // Reduced opacity
+                  opacity: Math.min(0.4, Math.max(0, (20 - char.y) / 40)) // Further reduced opacity
                 }}
               >
                 {char.char}

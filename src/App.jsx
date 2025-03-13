@@ -17,7 +17,7 @@ function App() {
   useEffect(() => {
     const hasVisited = sessionStorage.getItem('hasVisited');
     
-    // skip intro uncomment
+    // For dev remove 
     // const isLocalhost = window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1";
     // if (isLocalhost) {
     //   setShowIntro(false);
@@ -26,16 +26,20 @@ function App() {
     // }
     
     if (hasVisited) {
+      // Skip intro if user has already visited
       setShowIntro(false);
       setAppLoaded(true);
     } else {
+      // First visit, show intro
       setShowIntro(true);
     }
   }, []);
   
   const handleIntroComplete = () => {
+    // Mark as visited in session storage
     sessionStorage.setItem('hasVisited', 'true');
     
+    // Fade out intro and show main app
     setAppLoaded(true);
     setTimeout(() => {
       setShowIntro(false);
