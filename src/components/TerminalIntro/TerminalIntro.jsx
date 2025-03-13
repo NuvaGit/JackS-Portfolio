@@ -7,8 +7,24 @@ const TerminalIntro = ({ onComplete }) => {
   const [showCursor, setShowCursor] = useState(true);
   const [showMatrix, setShowMatrix] = useState(false);
   const [matrixChars, setMatrixChars] = useState([]);
+  const [isMobile, setIsMobile] = useState(false);
   const terminalRef = useRef(null);
   
+  // Detect mobile devices
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+    
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    
+    return () => {
+      window.removeEventListener('resize', checkMobile);
+    };
+  }, []);
+  
+  // Custom ASCII art for desktop
   const nameAscii = [
     "     ____.  _____  _________  ____  **.  **_____  ___________.___.____       _____    _______   ",
     "    |    | /  *  \\ \\*   ___ \\|    |/ *|  \\      \\ \\*   _____/|   |    |     /  _  \\   \\      \\  ",
@@ -19,16 +35,27 @@ const TerminalIntro = ({ onComplete }) => {
     "                                                                                                 "
   ];
 
+
+  // Smaller ASCII art for mobile
+  const mobileAscii =
+`     ____.  _____  _________  ____  __.
+     |    | /  _  \\ \\_   ___ \\|    |/ _|
+     |    |/  /_\\  \\/    \\  \\/|      <  
+/\\__|    /    |    \\     \\___|    |  \\ 
+\\________\\____|__  /\\______  /____|__ \\
+                 \\/        \\/        \\/`;
+
+
   const initMatrix = () => {
     const width = window.innerWidth;
-    const cols = Math.floor(width / 20); 
+    const cols = Math.floor(width / (isMobile ? 15 : 20));
     const chars = [];
     
     for (let i = 0; i < cols; i++) {
       chars.push({
         x: i,
         y: Math.floor(Math.random() * -20),
-        speed: 0.3 + Math.random() * 1, // speed
+        speed: 0.3 + Math.random() * 1,
         char: getRandomChar()
       });
     }
@@ -44,7 +71,6 @@ const TerminalIntro = ({ onComplete }) => {
   const updateMatrix = () => {
     setMatrixChars(prevChars => 
       prevChars.map(char => {
-        // Update y position
         const newY = char.y + char.speed;
         
         if (newY > 40) {
@@ -67,7 +93,7 @@ const TerminalIntro = ({ onComplete }) => {
     );
   };
 
-  const typeText = (text, callback, speed = 30) => { 
+  const typeText = (text, callback, speed = 50) => {
     let i = 0;
     setCurrentLine('');
     
@@ -81,14 +107,15 @@ const TerminalIntro = ({ onComplete }) => {
           setLines(prev => [...prev, text]);
           setCurrentLine('');
           if (callback) callback();
-        }, 700); 
+        }, 700);
       }
     }, speed);
   };
 
   const showAsciiArt = (callback) => {
-    setLines(prev => [...prev, ...nameAscii]);
-    setTimeout(callback, 2500); 
+    const asciiArt = isMobile ? mobileAscii : desktopAscii;
+    setLines(prev => [...prev, ...asciiArt]);
+    setTimeout(callback, 2500);
   };
 
   useEffect(() => {
@@ -100,7 +127,14 @@ const TerminalIntro = ({ onComplete }) => {
 
   useEffect(() => {
     initMatrix();
-  }, []);
+    
+    const handleResize = () => initMatrix();
+    window.addEventListener('resize', handleResize);
+    
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, [isMobile]);
 
   useEffect(() => {
     const cursorInterval = setInterval(() => {
@@ -111,32 +145,32 @@ const TerminalIntro = ({ onComplete }) => {
   }, []);
 
 
-
   useEffect(() => {
     const runAnimation = async () => {
       setShowMatrix(true);
       
+      const commandDelay = isMobile ? 600 : 800;
+      
       setTimeout(() => {
         typeText('$ whoami', () => {
-          setTimeout(() => { 
+          setTimeout(() => {
             typeText('jack@kali', () => {
-              setTimeout(() => { 
+              setTimeout(() => {
                 typeText('$ cd ~/portfolio', () => {
-                  setTimeout(() => { 
+                  setTimeout(() => {
                     typeText('$ ls -la', () => {
-                      setTimeout(() => { 
-                        typeText('-rw-r--r-- 1 jack users  495 Mar 12 10:38 README.md', () => {
-                          setTimeout(() => { 
-                            typeText('-rw-r--r-- 1 jack users 12853 Mar 12 10:40 portfolio.js', () => {
-                              setTimeout(() => { 
+                      setTimeout(() => {
+                        typeText('-rw-r--r-- 1 jack users 495 Mar 12 README.md', () => {
+                          setTimeout(() => {
+                            typeText('-rw-r--r-- 1 jack users 12853 Mar 12 portfolio.js', () => {
+                              setTimeout(() => {
                                 typeText('$ node portfolio.js', () => {
-                                  setTimeout(() => { 
+                                  setTimeout(() => {
                                     showAsciiArt(() => {
                                       typeText('Computer Science Student at UCD', () => {
                                         typeText('Looking for Work in FinTech', () => {
                                           typeText('$ sudo run booting-portfolio...', () => {
                                             typeText('Loading assets: [████████████████████] 100%', () => {
-                                              
                                               setTimeout(() => {
                                                 typeText('Are you sure you want to exit? [Y/n]', () => {
                                                   setTimeout(() => {
@@ -160,30 +194,30 @@ const TerminalIntro = ({ onComplete }) => {
                                         });
                                       });
                                     });
-                                  }, 800); // Added delay
+                                  }, commandDelay);
                                 });
-                              }, 800); // Added delay
+                              }, commandDelay);
                             });
-                          }, 800); // Added delay
+                          }, commandDelay);
                         });
-                      }, 800); // Added delay
+                      }, commandDelay);
                     });
-                  }, 800); // Added delay
+                  }, commandDelay);
                 });
-              }, 800); // Added delay
+              }, commandDelay);
             });
-          }, 800); 
+          }, commandDelay);
         });
-      }, 1500); 
+      }, 1500);
     };
 
     setTimeout(runAnimation, 1000);
     
     setTimeout(() => {
       onComplete();
-    }, 20000); 
+    }, 20000);
     
-  }, []);
+  }, [isMobile]);
 
   return (
     <div className="terminal-container">
@@ -196,7 +230,6 @@ const TerminalIntro = ({ onComplete }) => {
         <div className="terminal-title">C:\WINDOWS\system32\cmd.exe</div>
       </div>
       <div className="terminal-body" ref={terminalRef}>
-        {/* Matrix effect layer - reduced opacity for better text visibility */}
         {showMatrix && (
           <div className="matrix-effect">
             {matrixChars.map((char, index) => (
@@ -204,9 +237,9 @@ const TerminalIntro = ({ onComplete }) => {
                 key={index}
                 className="matrix-char"
                 style={{
-                  left: `${char.x * 20}px`,
-                  top: `${char.y * 20}px`,
-                  opacity: Math.min(0.4, Math.max(0, (20 - char.y) / 40)) // Further reduced opacity
+                  left: `${char.x * (isMobile ? 15 : 20)}px`,
+                  top: `${char.y * (isMobile ? 15 : 20)}px`,
+                  opacity: Math.min(0.4, Math.max(0, (20 - char.y) / 40))
                 }}
               >
                 {char.char}
@@ -215,9 +248,13 @@ const TerminalIntro = ({ onComplete }) => {
           </div>
         )}
         
-        {/* Terminal text */}
         {lines.map((line, index) => (
-          <div key={index} className={`terminal-line ${index >= 6 && index <= 18 ? 'ascii-art' : ''}`}>
+          <div 
+            key={index} 
+            className={`terminal-line ${(isMobile && index >= 3 && index <= 7) || 
+                                       (!isMobile && index >= 6 && index <= 18) ? 
+                                       'ascii-art' : ''}`}
+          >
             {line}
           </div>
         ))}

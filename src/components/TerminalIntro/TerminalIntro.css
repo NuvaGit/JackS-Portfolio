@@ -64,7 +64,7 @@
 }
 
 .terminal-line {
-  white-space: pre;
+  white-space: pre-wrap; /* Changed from pre to pre-wrap for better mobile wrapping */
   font-family: 'Consolas', monospace;
   margin-bottom: 4px;
   color: #0f0; /* Matrix green */
@@ -72,6 +72,7 @@
   position: relative;
   z-index: 10;
   font-weight: normal;
+  word-break: break-word; /* Added to prevent overflow on small screens */
 }
 
 /* Special styling for ASCII art */
@@ -83,6 +84,8 @@
   line-height: 1 !important;
   font-family: monospace !important;
   letter-spacing: 0 !important;
+  overflow-x: auto; /* Allow horizontal scrolling for ASCII art */
+  max-width: 100%;
 }
 
 .current-line {
@@ -127,12 +130,6 @@
   font-weight: bold;
 }
 
-/* Special commands styling */
-.terminal-line:nth-child(n+19):nth-child(-n+22) {
-  color: #00ff00;
-  font-weight: bold;
-}
-
 /* Animation for the terminal startup */
 @keyframes fadeIn {
   from { opacity: 0; }
@@ -158,13 +155,14 @@
 }
 
 /* Media query for smaller screens */
-@media (max-width: 768px) {
+@media screen and (max-width: 768px) {
   .terminal-body {
-    font-size: 14px;
+    font-size: 12px;
+    padding: 10px;
   }
   
   .matrix-char {
-    font-size: 14px;
+    font-size: 12px;
   }
   
   .terminal-title {
@@ -172,6 +170,32 @@
   }
   
   .ascii-art {
-    font-size: 12px !important;
+    font-size: 8px !important;
+    white-space: nowrap; /* Keep ASCII art on one line */
+    transform: scale(0.6); /* Scale down ASCII art on mobile */
+    transform-origin: left top;
+    margin-bottom: 0;
+  }
+
+  .cursor {
+    width: 6px;
+    height: 14px;
+  }
+}
+
+/* Media query for very small screens */
+@media screen and (max-width: 480px) {
+  .terminal-body {
+    font-size: 10px;
+    padding: 8px;
+  }
+  
+  .terminal-line {
+    margin-bottom: 2px;
+  }
+  
+  .ascii-art {
+    font-size: 6px !important;
+    transform: scale(0.5);
   }
 }
