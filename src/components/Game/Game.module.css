@@ -1,0 +1,208 @@
+@import "../../vars.css";
+
+.gameContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #000;
+  min-height: 100vh;
+  padding: 30px 20px;
+  color: var(--color-primary);
+  position: relative;
+  overflow: hidden;
+}
+
+.matrixBackground {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.matrixChar {
+  position: absolute;
+  color: var(--color-primary);
+  font-family: monospace;
+  font-size: 18px;
+  font-weight: bold;
+  text-shadow: 0 0 8px var(--color-primary);
+  z-index: 0;
+}
+
+.gameTitle {
+  font-size: 36px;
+  margin-bottom: 20px;
+  text-shadow: 0 0 10px var(--color-primary);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  z-index: 2;
+}
+
+.gameInfo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 20px;
+  width: 100%;
+  max-width: 800px;
+  z-index: 2;
+}
+
+.scoreBoard {
+  background-color: rgba(0, 20, 0, 0.7);
+  border: 2px solid var(--color-primary);
+  border-radius: 5px;
+  padding: 10px 20px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 15px;
+  box-shadow: 0 0 15px rgba(0, 255, 0, 0.3);
+  font-family: monospace;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.instructions {
+  font-size: 16px;
+  text-align: center;
+  color: #cccccc;
+  margin-bottom: 10px;
+  font-family: monospace;
+  line-height: 1.5;
+}
+
+.gameScene {
+  width: 800px;
+  height: 600px;
+  border: 3px solid var(--color-primary);
+  border-radius: 5px;
+  box-shadow: 0 0 30px rgba(0, 255, 0, 0.4);
+  position: relative;
+  overflow: hidden;
+  z-index: 2;
+}
+
+.startScreen, .gameOverScreen, .errorScreen {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 800px;
+  height: 600px;
+  background-color: rgba(0, 0, 0, 0.85);
+  border: 3px solid var(--color-primary);
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-primary);
+  text-align: center;
+  padding: 20px;
+  box-shadow: 0 0 30px rgba(0, 255, 0, 0.4);
+  z-index: 10;
+}
+
+.startContent, .gameOverContent {
+  max-width: 500px;
+}
+
+.startScreen h2, .gameOverScreen h2, .errorScreen h2 {
+  font-size: 36px;
+  margin-bottom: 20px;
+  text-shadow: 0 0 10px var(--color-primary);
+}
+
+.startScreen p, .gameOverScreen p, .errorScreen p {
+  font-size: 18px;
+  margin-bottom: 30px;
+  line-height: 1.5;
+}
+
+.startButton, .resetButton {
+  background-color: rgba(0, 50, 0, 0.8);
+  color: var(--color-primary);
+  border: 2px solid var(--color-primary);
+  border-radius: 4px;
+  padding: 12px 25px;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  box-shadow: 0 0 15px rgba(0, 255, 0, 0.3);
+}
+
+.startButton:hover, .resetButton:hover {
+  background-color: var(--color-primary);
+  color: #000;
+  transform: translateY(-3px);
+  box-shadow: 0 5px 20px rgba(0, 255, 0, 0.5);
+}
+
+.scanlines {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 0.15),
+    rgba(0, 0, 0, 0.15) 1px,
+    transparent 1px,
+    transparent 2px
+  );
+  pointer-events: none;
+  z-index: 3;
+}
+
+.bonusFlash {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 100, 255, 0.2);
+  pointer-events: none;
+  z-index: 5;
+  animation: flash 0.5s ease-out;
+}
+
+@keyframes flash {
+  0% { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+.errorScreen code {
+  background-color: rgba(0, 20, 0, 0.7);
+  padding: 10px 15px;
+  border-radius: 4px;
+  font-family: monospace;
+  font-size: 16px;
+  display: block;
+  margin-top: 15px;
+}
+
+@media screen and (max-width: 850px) {
+  .gameScene, .startScreen, .gameOverScreen, .errorScreen {
+    width: 95vw;
+    height: 70vh;
+  }
+  
+  .gameTitle {
+    font-size: 28px;
+  }
+  
+  .scoreBoard {
+    font-size: 16px;
+  }
+  
+  .instructions {
+    font-size: 14px;
+  }
+}

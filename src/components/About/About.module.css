@@ -2,21 +2,25 @@
 
 .container {
   position: relative;
-  background-color: rgba(20, 20, 20, 0.8);
-  border-radius: 15px;
-  padding: 73px;
+  background-color: var(--color-bg-secondary);
+  border: 1px solid var(--color-primary);
+  border-radius: 10px;
+  padding: 60px;
   margin-top: 129px;
   z-index: 1;
   margin-left: 10%;
   margin-right: 10%;
+  box-shadow: 0 0 30px rgba(0, 255, 0, 0.2);
 }
 
 .title {
-  color: var(--color-text);
+  color: var(--color-primary);
   font-size: 35px;
   font-weight: 700;
   letter-spacing: 1.75px;
   text-transform: uppercase;
+  margin-bottom: 30px;
+  text-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
 }
 
 .content {
@@ -27,50 +31,80 @@
 
 .aboutImage {
   width: 35%;
+  border-radius: 10px;
+  border: 2px solid var(--color-primary);
+  box-shadow: 0 0 20px rgba(0, 255, 0, 0.3);
+  filter: brightness(0.9) contrast(1.1) saturate(1.1);
+  transition: all 0.3s ease;
+}
+
+.aboutImage:hover {
+  transform: scale(1.02);
+  box-shadow: 0 0 25px rgba(0, 255, 0, 0.5);
 }
 
 .aboutItems {
   color: var(--color-text);
   display: flex;
   flex-direction: column;
-  gap: 50px;
+  gap: 40px;
+  margin-left: 40px;
 }
 
 .aboutItem {
   display: flex;
   flex-direction: row;
   align-items: center;
-  border-radius: 20px;
+  border-radius: 10px;
   list-style: none;
-  padding: 25px;
-  background-image: linear-gradient(
+  padding: 20px;
+  background: linear-gradient(
     90deg,
-    rgba(60, 60, 60, 0.42) 0%,
-    rgba(20, 20, 20, 0) 100%
+    rgba(0, 50, 0, 0.4) 0%,
+    rgba(0, 20, 0, 0) 100%
   );
   background-size: 0 100%;
   background-repeat: no-repeat;
   transition: 0.4s;
+  border-left: 3px solid var(--color-primary);
 }
 
 .aboutItem:hover {
   background-size: 100% 100%;
+  box-shadow: 0 0 15px rgba(0, 255, 0, 0.2);
+  transform: translateX(5px);
+}
+
+.aboutItem img {
+  filter: brightness(0) saturate(100%) invert(72%) sepia(82%) saturate(2314%) hue-rotate(86deg) brightness(118%) contrast(128%);
+  margin-right: 15px;
+  transition: transform 0.3s ease;
+}
+
+.aboutItem:hover img {
+  transform: scale(1.1) rotate(5deg);
+}
+
+.aboutItemText {
+  flex: 1;
 }
 
 .aboutItem h3 {
-  font-size: 25px;
+  font-size: 24px;
   font-weight: 600;
+  color: var(--color-primary);
+  margin-bottom: 10px;
 }
 
 .aboutItem p {
-  font-size: 25px;
+  font-size: 18px;
+  line-height: 1.5;
 }
 
 @media screen and (max-width: 830px) {
   .container {
-    background-color: transparent;
-    padding-left: 0;
-    padding-right: 0;
+    background-color: var(--color-bg-secondary);
+    padding: 40px 20px;
   }
 
   .content {
@@ -78,15 +112,25 @@
   }
 
   .aboutImage {
-    display: none;
+    width: 70%;
+    margin-bottom: 30px;
   }
 
   .aboutItems {
-    margin-top: 29px;
+    margin-top: 20px;
+    margin-left: 0;
+    width: 100%;
   }
 
   .aboutItem {
-    padding-left: 0;
-    padding-right: 0;
+    padding: 15px;
+  }
+  
+  .aboutItem h3 {
+    font-size: 20px;
+  }
+  
+  .aboutItem p {
+    font-size: 16px;
   }
 }

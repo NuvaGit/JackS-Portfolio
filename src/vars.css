@@ -1,11 +1,12 @@
 :root {
-  /* Colors */
-  --color-text: #ffffff; /* Keep text white for contrast */
-  --color-primary: #a83232; /* Darker, deeper red for primary color */
-  --color-secondary: #732626; /* Slightly darker shade for secondary elements */
-  --color-dark: #4d1f1f; /* Dark red-black, to replace darker background elements */
-  --color-bg: #2b1a1a; /* Reddish black for main background color */
+  --color-text: #ffffff;        
+  --color-primary: #00ff00;     
+  --color-secondary: #00cc00;   
+  --color-dark: #003300;        
+  --color-bg: #000000;          
+  --color-bg-secondary: #0a0a0a; 
+  --color-highlight: #00ff33;   
+  --color-shadow: #003300;      
 
-  /* Fonts */
   --font-roboto: "Roboto", sans-serif;
 }

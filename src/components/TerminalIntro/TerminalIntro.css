@@ -1,0 +1,177 @@
+.terminal-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #000;
+  z-index: 1000;
+  font-family: 'Consolas', monospace;
+  color: #0f0; /* Matrix green */
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.terminal-header {
+  background-color: #0c0c0c;
+  padding: 4px 8px;
+  display: flex;
+  align-items: center;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+}
+
+.terminal-buttons {
+  display: flex;
+  margin-right: 12px;
+}
+
+.button {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  margin-right: 8px;
+}
+
+.close {
+  background-color: #ff5f56;
+}
+
+.minimize {
+  background-color: #ffbd2e;
+}
+
+.maximize {
+  background-color: #27c93f;
+}
+
+.terminal-title {
+  color: #fff;
+  font-size: 12px;
+  flex-grow: 1;
+  text-align: center;
+}
+
+.terminal-body {
+  flex-grow: 1;
+  padding: 16px;
+  overflow-y: auto;
+  background-color: #000;
+  line-height: 1.2;
+  font-size: 16px;
+  position: relative;
+}
+
+.terminal-line {
+  white-space: pre;
+  font-family: 'Consolas', monospace;
+  margin-bottom: 4px;
+  color: #0f0; /* Matrix green */
+  text-shadow: 0 0 5px rgba(0, 255, 0, 0.5);
+  position: relative;
+  z-index: 10;
+  font-weight: normal;
+}
+
+/* Special styling for ASCII art */
+.ascii-art {
+  font-weight: bold !important;
+  color: #00ff00 !important; 
+  text-shadow: 0 0 8px #0f0 !important;
+  font-size: 16px !important;
+  line-height: 1 !important;
+  font-family: monospace !important;
+  letter-spacing: 0 !important;
+}
+
+.current-line {
+  display: flex;
+  align-items: center;
+}
+
+.cursor {
+  display: inline-block;
+  width: 8px;
+  height: 20px;
+  margin-left: 1px;
+  background-color: #0f0;
+  box-shadow: 0 0 8px #0f0;
+}
+
+.cursor.visible {
+  opacity: 1;
+}
+
+.cursor.hidden {
+  opacity: 0;
+}
+
+/* Matrix effect styling */
+.matrix-effect {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.6; /* Make it more subtle so text is readable */
+}
+
+.matrix-char {
+  position: absolute;
+  color: #0f0; /* Matrix green */
+  text-shadow: 0 0 8px #0f0;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+/* Special commands styling */
+.terminal-line:nth-child(n+19):nth-child(-n+22) {
+  color: #00ff00;
+  font-weight: bold;
+}
+
+/* Animation for the terminal startup */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.terminal-container {
+  animation: fadeIn 0.5s ease-in;
+}
+
+/* Custom scrollbar */
+.terminal-body::-webkit-scrollbar {
+  width: 8px;
+}
+
+.terminal-body::-webkit-scrollbar-thumb {
+  background-color: #0f0;
+  border-radius: 4px;
+}
+
+.terminal-body::-webkit-scrollbar-track {
+  background-color: #000;
+}
+
+/* Media query for smaller screens */
+@media (max-width: 768px) {
+  .terminal-body {
+    font-size: 14px;
+  }
+  
+  .matrix-char {
+    font-size: 14px;
+  }
+  
+  .terminal-title {
+    font-size: 10px;
+  }
+  
+  .ascii-art {
+    font-size: 12px !important;
+  }
+}

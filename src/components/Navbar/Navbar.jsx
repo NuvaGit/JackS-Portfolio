@@ -1,16 +1,25 @@
 import React, { useState } from "react";
-
+import { Link } from "react-router-dom";
 import styles from "./Navbar.module.css";
 import { getImageUrl } from "../../utils";
 
 export const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
 
+  // Helper function to handle smooth scrolling to sections
+  const scrollToSection = (sectionId) => {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+    setMenuOpen(false); // Close menu after clicking
+  };
+
   return (
     <nav className={styles.navbar}>
-      <a className={styles.title} href="/">
+      <Link className={styles.title} to="/">
         Portfolio
-      </a>
+      </Link>
       <div className={styles.menu}>
         <img
           className={styles.menuBtn}
@@ -24,22 +33,53 @@ export const Navbar = () => {
         />
         <ul
           className={`${styles.menuItems} ${menuOpen && styles.menuOpen}`}
-          onClick={() => setMenuOpen(false)}
         >
           <li>
-            <a href="/JackS-Portfolio/#about">About</a>
+            <a 
+              href="#" 
+              onClick={(e) => {
+                e.preventDefault();
+                scrollToSection("about");
+              }}
+            >
+              About
+            </a>
           </li>
           <li>
-            <a href="/JackS-Portfolio/#experience">Experience</a>
+            <a 
+              href="#" 
+              onClick={(e) => {
+                e.preventDefault();
+                scrollToSection("experience");
+              }}
+            >
+              Experience
+            </a>
           </li>
           <li>
-            <a href="/JackS-Portfolio/game">Game</a>
+            <a 
+              href="#" 
+              onClick={(e) => {
+                e.preventDefault();
+                scrollToSection("projects");
+              }}
+            >
+              Projects
+            </a>
           </li>
           <li>
-            <a href="/JackS-Portfolio/#contact">Contact</a>
+            <a 
+              href="#" 
+              onClick={(e) => {
+                e.preventDefault();
+                scrollToSection("contact");
+              }}
+            >
+              Contact
+            </a>
           </li>
           <li>
-          <a href="/JackS-Portfolio/game"rel="noopener noreferrer">Game</a>
+            <Link to="/game" onClick={() => setMenuOpen(false)}>Game</Link>
           </li>
         </ul>
       </div>

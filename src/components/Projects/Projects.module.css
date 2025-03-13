@@ -1,7 +1,8 @@
+/* Projects.module.css */
 @import "../../vars.css";
 
 .container {
-  margin-top: 76px;
+  margin-top: 100px;
   color: var(--color-text);
   margin-left: 10%;
   margin-right: 10%;
@@ -12,6 +13,9 @@
   font-weight: 700;
   letter-spacing: 1.75px;
   text-transform: uppercase;
+  color: var(--color-primary);
+  text-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
+  margin-bottom: 40px;
 }
 
 .projects {
@@ -21,6 +25,6 @@
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
-  gap: 15px;
+  gap: 30px;
   width: 100%;
 }
