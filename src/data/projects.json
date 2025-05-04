@@ -2,7 +2,7 @@
   {
     "title": "Trading Bot",
     "imageSrc": "projects/project.png",
-    "description": " Python-based trading bot, Implements machine learning to predict prices",
+    "description": "Python-based trading bot, Implements machine learning to predict prices",
     "skills": ["Python", "Machine Learning"],
     "demo": "https://www.example.com",
     "source": "https://github.com/NuvaGit/TradingBot"
@@ -16,6 +16,14 @@
     "source": "https://github.com/NuvaGit/EcommerceSoringBoot"
   },
   {
+    "title": "MicroMentor",
+    "imageSrc": "projects/project.png",
+    "description": "iOS app built with Flutter that leverages Firebase, Cloud Run functions, OpenAI API, YouTube API, and RevenueCat for...",
+    "skills": ["Flutter", "Firebase", "OpenAI API", "YouTube API", "RevenueCat"],
+    "demo": "https://www.example.com",
+    "source": "https://github.com/NuvaGit/MicroMentor"
+  },
+  {
     "title": "Quest Game",
     "imageSrc": "projects/project.png",
     "description": "Quest Game implemented in java",
@@ -27,9 +35,8 @@
     "title": "Messaging Service",
     "imageSrc": "projects/project.png",
     "description": "Private Messaging, Group Chat Video call",
-    "skills": ["Node.js","MongoDB","Deployments"],
+    "skills": ["Node.js", "MongoDB", "Deployments"],
     "demo": "https://nuvagit.github.io/securegroupchat-frontend/",
     "source": "https://github.com/NuvaGit/securegroupchat-frontend"
-    
   }
 ]
