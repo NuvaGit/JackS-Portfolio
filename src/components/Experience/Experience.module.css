@@ -45,7 +45,7 @@
 }
 
 .skillImageContainer {
-  background-color: var(--color-dark);
+  background-color: rgba(0, 30, 0, 0.8);
   border: 2px solid var(--color-primary);
   border-radius: 50%;
   display: flex;
@@ -55,6 +55,8 @@
   height: 110px;
   box-shadow: 0 0 15px rgba(0, 255, 0, 0.3);
   transition: all 0.3s ease;
+  overflow: hidden;
+  position: relative;
 }
 
 .skill:hover .skillImageContainer {
@@ -66,7 +68,21 @@
   width: 65px;
   height: 65px;
   object-fit: contain;
-  filter: brightness(0) saturate(100%) invert(80%) sepia(72%) saturate(436%) hue-rotate(86deg) brightness(118%) contrast(119%);
+  /* Apply a consistent cyan color to all icons */
+  filter: brightness(0) saturate(100%) invert(88%) sepia(61%) saturate(1200%) hue-rotate(140deg) brightness(105%) contrast(101%) !important;
+  transition: all 0.3s ease;
+}
+
+/* For HTML and CSS, ensure they're filled and not just outlines */
+.skill[data-skill="HTML"] .skillImageContainer img,
+.skill[data-skill="CSS"] .skillImageContainer img {
+  /* Specific styling for HTML and CSS to ensure they're filled */
+  filter: brightness(0) saturate(100%) invert(88%) sepia(61%) saturate(1200%) hue-rotate(140deg) brightness(105%) contrast(101%);
+}
+
+/* Custom styling for specific skills if needed */
+.cppIcon, .pythonIcon, .javaIcon, .nodeIcon, .angularIcon, .reactIcon, .springBootIcon {
+  filter: brightness(0) saturate(100%) invert(88%) sepia(61%) saturate(1200%) hue-rotate(140deg) brightness(105%) contrast(101%);
 }
 
 .skill p {

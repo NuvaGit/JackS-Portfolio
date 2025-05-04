@@ -1,25 +1,35 @@
+:root {
+  --terminal-primary: #00ff00;
+  --terminal-secondary: #00aa00;
+  --terminal-bg: rgba(0, 10, 0, 0.95);
+}
+
 .terminal-container {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: #000;
+  background-color: rgba(0, 0, 0, 0.95);
   z-index: 1000;
-  font-family: 'Consolas', monospace;
-  color: #0f0; /* Matrix green */
+  font-family: 'Consolas', 'Courier New', monospace;
+  color: var(--terminal-primary);
   display: flex;
   flex-direction: column;
   overflow: hidden;
+  transition: all 0.3s ease-in-out;
 }
 
 .terminal-header {
-  background-color: #0c0c0c;
-  padding: 4px 8px;
+  background-color: #0a0a0a;
+  padding: 8px 12px;
   display: flex;
   align-items: center;
-  border-top-left-radius: 4px;
-  border-top-right-radius: 4px;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  border-bottom: 1px solid var(--terminal-secondary);
+  box-shadow: 0 0 15px rgba(0, 255, 0, 0.2);
+  height: 36px; /* Fixed height to prevent layout shifts */
 }
 
 .terminal-buttons {
@@ -32,6 +42,12 @@
   height: 12px;
   border-radius: 50%;
   margin-right: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.button:hover {
+  transform: scale(1.1);
 }
 
 .close {
@@ -47,59 +63,134 @@
 }
 
 .terminal-title {
-  color: #fff;
-  font-size: 12px;
+  color: var(--terminal-primary);
+  font-size: 14px;
   flex-grow: 1;
   text-align: center;
+  font-weight: bold;
+  text-shadow: 0 0 5px var(--terminal-primary);
 }
 
 .terminal-body {
   flex-grow: 1;
-  padding: 16px;
+  padding: 20px;
   overflow-y: auto;
-  background-color: #000;
-  line-height: 1.2;
+  background-color: var(--terminal-bg);
+  line-height: 1.4;
   font-size: 16px;
   position: relative;
+  background-image: radial-gradient(
+    rgba(0, 50, 0, 0.3) 2px,
+    transparent 2px
+  );
+  background-size: 32px 32px;
+  background-position: -16px -16px;
+  /* Fixed content box to prevent layout shifts */
+  height: calc(100vh - 36px - 50px);
+  min-height: 300px;
+  max-height: calc(100vh - 36px - 50px);
+  box-sizing: border-box;
+  overscroll-behavior: none; /* Prevent bouncing on mobile */
+}
+
+.terminal-body::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    transparent 30%,
+    rgba(0, 0, 0, 0.2) 50%,
+    transparent 70%
+  );
+  background-size: 100% 5px;
+  opacity: 0.1;
+  pointer-events: none;
+  z-index: 2;
 }
 
 .terminal-line {
-  white-space: pre-wrap; /* Changed from pre to pre-wrap for better mobile wrapping */
-  font-family: 'Consolas', monospace;
+  white-space: pre-wrap;
+  font-family: 'Consolas', 'Courier New', monospace;
   margin-bottom: 4px;
-  color: #0f0; /* Matrix green */
-  text-shadow: 0 0 5px rgba(0, 255, 0, 0.5);
+  color: var(--terminal-primary);
+  text-shadow: 0 0 5px rgba(0, 255, 0, 0.3);
   position: relative;
   z-index: 10;
   font-weight: normal;
-  word-break: break-word; /* Added to prevent overflow on small screens */
+  word-break: break-word;
+  transition: all 0.3s ease;
+  padding: 2px 0;
+  /* Prevent layout shifts with fixed line height */
+  min-height: 1.4em;
+  line-height: 1.4;
+  /* Pre-allocate space to prevent shifts */
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.terminal-line:hover {
+  background-color: rgba(0, 255, 0, 0.1);
+  text-shadow: 0 0 8px rgba(0, 255, 0, 0.8);
+  transform: translateX(2px);
 }
 
 /* Special styling for ASCII art */
 .ascii-art {
   font-weight: bold !important;
-  color: #00ff00 !important; 
-  text-shadow: 0 0 8px #0f0 !important;
+  color: var(--terminal-primary) !important; 
+  text-shadow: 0 0 8px var(--terminal-primary) !important;
   font-size: 16px !important;
   line-height: 1 !important;
   font-family: monospace !important;
   letter-spacing: 0 !important;
-  overflow-x: auto; /* Allow horizontal scrolling for ASCII art */
+  overflow-x: auto;
   max-width: 100%;
+  animation: glowPulse 2s infinite;
+  /* Prevent horizontal jitter by using pre */
+  white-space: pre;
+  overflow-x: auto;
+}
+
+.command-line {
+  color: var(--terminal-secondary) !important;
+  font-weight: bold;
 }
 
 .current-line {
   display: flex;
   align-items: center;
+  /* Fixed height to prevent layout shifts */
+  min-height: 1.4em;
+  height: 1.4em;
+  width: 100%;
+}
+
+.prompt-text {
+  color: var(--terminal-secondary);
+  font-weight: bold;
+  margin-right: 5px;
+}
+
+.user-input {
+  color: #ffffff;
+  /* Pre-allocate space to prevent shifts */
+  min-width: 1px;
+  flex-grow: 1;
 }
 
 .cursor {
   display: inline-block;
   width: 8px;
-  height: 20px;
-  margin-left: 1px;
-  background-color: #0f0;
-  box-shadow: 0 0 8px #0f0;
+  height: 18px;
+  margin-left: 2px;
+  background-color: var(--terminal-primary);
+  box-shadow: 0 0 8px var(--terminal-primary);
+  /* Fixed position to prevent layout shifts */
+  position: relative;
+  top: 1px;
 }
 
 .cursor.visible {
@@ -119,15 +210,19 @@
   height: 100%;
   pointer-events: none;
   z-index: 1;
-  opacity: 0.6; /* Make it more subtle so text is readable */
+  opacity: 0.5;
+  transition: opacity 0.5s ease;
 }
 
 .matrix-char {
   position: absolute;
-  color: #0f0; /* Matrix green */
-  text-shadow: 0 0 8px #0f0;
+  color: var(--terminal-primary);
+  text-shadow: 0 0 8px var(--terminal-primary);
   font-size: 18px;
   font-weight: bold;
+  /* Fixed position to prevent layout shifts */
+  transform: translateZ(0);
+  will-change: transform;
 }
 
 /* Animation for the terminal startup */
@@ -136,66 +231,170 @@
   to { opacity: 1; }
 }
 
+@keyframes glowPulse {
+  0% { text-shadow: 0 0 5px var(--terminal-primary); }
+  50% { text-shadow: 0 0 15px var(--terminal-primary); }
+  100% { text-shadow: 0 0 5px var(--terminal-primary); }
+}
+
 .terminal-container {
   animation: fadeIn 0.5s ease-in;
 }
 
+/* Hidden input for keyboard handling */
+.hidden-input {
+  position: absolute;
+  top: -9999px;
+  left: -9999px;
+  opacity: 0;
+  pointer-events: none;
+}
+
 /* Custom scrollbar */
 .terminal-body::-webkit-scrollbar {
-  width: 8px;
+  width: 10px;
 }
 
 .terminal-body::-webkit-scrollbar-thumb {
-  background-color: #0f0;
+  background-color: var(--terminal-secondary);
   border-radius: 4px;
+  border: 2px solid #000;
+}
+
+.terminal-body::-webkit-scrollbar-thumb:hover {
+  background-color: var(--terminal-primary);
 }
 
 .terminal-body::-webkit-scrollbar-track {
   background-color: #000;
+  border-radius: 4px;
+}
+
+/* Terminal footer with theme switcher and skip button */
+.terminal-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: var(--terminal-bg);
+  border-top: 1px solid var(--terminal-secondary);
+  height: 50px; /* Fixed height to prevent layout shifts */
+  box-sizing: border-box;
+}
+
+.theme-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.theme-btn {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: 2px solid #222;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.theme-btn:hover {
+  transform: scale(1.2);
+  box-shadow: 0 0 10px currentColor;
+}
+
+.matrix-theme {
+  background-color: #00ff00;
+  border-color: #00aa00;
+}
+
+.blue-theme {
+  background-color: #00ccff;
+  border-color: #0077cc;
+}
+
+.amber-theme {
+  background-color: #ffaa00;
+  border-color: #cc7700;
+}
+
+.skip-button {
+  background-color: rgba(0, 40, 0, 0.8);
+  color: var(--terminal-primary);
+  border: 1px solid var(--terminal-primary);
+  border-radius: 4px;
+  padding: 8px 16px;
+  font-family: 'Consolas', 'Courier New', monospace;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.skip-button:hover {
+  background-color: var(--terminal-primary);
+  color: #000;
+  box-shadow: 0 0 10px var(--terminal-primary);
 }
 
 /* Media query for smaller screens */
 @media screen and (max-width: 768px) {
   .terminal-body {
-    font-size: 12px;
-    padding: 10px;
+    font-size: 14px;
+    padding: 12px;
   }
   
   .matrix-char {
-    font-size: 12px;
+    font-size: 14px;
   }
   
   .terminal-title {
-    font-size: 10px;
+    font-size: 12px;
   }
   
   .ascii-art {
-    font-size: 8px !important;
+    font-size: 10px !important;
     white-space: nowrap; /* Keep ASCII art on one line */
-    transform: scale(0.6); /* Scale down ASCII art on mobile */
+    transform: scale(0.8);
     transform-origin: left top;
-    margin-bottom: 0;
+    margin-bottom: 5px;
   }
 
   .cursor {
     width: 6px;
-    height: 14px;
+    height: 16px;
+  }
+  
+  .theme-btn {
+    width: 20px;
+    height: 20px;
   }
 }
 
 /* Media query for very small screens */
 @media screen and (max-width: 480px) {
   .terminal-body {
-    font-size: 10px;
-    padding: 8px;
+    font-size: 12px;
+    padding: 10px;
   }
   
   .terminal-line {
-    margin-bottom: 2px;
+    margin-bottom: 3px;
   }
   
   .ascii-art {
-    font-size: 6px !important;
-    transform: scale(0.5);
+    font-size: 8px !important;
+    transform: scale(0.7);
+  }
+  
+  .theme-buttons {
+    gap: 5px;
+  }
+  
+  .theme-btn {
+    width: 16px;
+    height: 16px;
+  }
+  
+  .skip-button {
+    padding: 6px 12px;
+    font-size: 12px;
   }
 }

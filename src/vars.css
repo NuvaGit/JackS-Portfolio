@@ -10,3 +10,59 @@
 
   --font-roboto: "Roboto", sans-serif;
 }
+
+/* Dark theme variables */
+:root.dark-theme {
+  --color-text: #ffffff;
+  --color-primary: #00ccff;     /* Changed to blue for dark theme */
+  --color-secondary: #0099cc;   
+  --color-dark: #002233;        
+  --color-bg: #000000;          
+  --color-bg-secondary: #0a0a0a; 
+  --color-highlight: #33ccff;   
+  --color-shadow: #001122;      
+}
+
+/* CSS Reset to make sure everything uses the variables */
+* {
+  transition: color 0.3s ease, background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Add specific dark theme styling for elements that need it */
+.dark-theme .terminal-container {
+  --matrix-color: #00ccff;
+}
+
+.dark-theme .cursor {
+  background-color: var(--color-primary);
+}
+
+.dark-theme .matrix-char {
+  color: var(--color-primary);
+  text-shadow: 0 0 8px var(--color-primary);
+}
+
+.dark-theme .button {
+  background-color: var(--color-primary);
+}
+
+/* Animation for transitions */
+@keyframes colorTransition {
+  from { color: #00ff00; }
+  to { color: var(--color-primary); }
+}
+
+@keyframes backgroundTransition {
+  from { background-color: #000000; }
+  to { background-color: var(--color-bg); }
+}
+
+@keyframes borderTransition {
+  from { border-color: #00ff00; }
+  to { border-color: var(--color-primary); }
+}
+
+@keyframes shadowTransition {
+  from { box-shadow: 0 0 10px rgba(0, 255, 0, 0.5); }
+  to { box-shadow: 0 0 10px var(--color-primary); }
+}
