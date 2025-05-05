@@ -4,51 +4,50 @@ import history from "../../data/history.json";
 import { getImageUrl } from "../../utils";
 
 export const Experience = () => {
-  // Manually define skill icons to ensure correct display
   const skills = [
     {
       title: "Java",
-      imageUrl: "/assets/skills/java.png",
+      imageUrl: getImageUrl("skills/java.png"),
       color: "#f89820" // Original Java color
     },
     {
       title: "C++",
-      imageUrl: "/assets/skills/cpp.png", 
+      imageUrl: getImageUrl("skills/cplus2.png"), 
       color: "#044F88" // C++ blue color
     },
     {
       title: "Python",
-      imageUrl: "/assets/skills/python.png",
+      imageUrl: getImageUrl("skills/cplus.png"),
       color: "#4584b6" // Python blue color
     },
     {
       title: "HTML",
-      imageUrl: "/assets/skills/html.png",
+      imageUrl: getImageUrl("skills/html.png"),
       color: "#e34c26" // HTML orange color
     },
     {
       title: "CSS",
-      imageUrl: "/assets/skills/css.png",
+      imageUrl: getImageUrl("skills/css.png"),
       color: "#264de4" // CSS blue color
     },
     {
       title: "React",
-      imageUrl: "/assets/skills/react.png",
+      imageUrl: getImageUrl("skills/react.png"),
       color: "#61dafb" // React blue color
     },
     {
       title: "Node",
-      imageUrl: "/assets/skills/node.png",
+      imageUrl: getImageUrl("skills/node.png"),
       color: "#3c873a" // Node green color
     },
     {
       title: "Spring Boot",
-      imageUrl: "/assets/skills/SpringBoot.png",
+      imageUrl: getImageUrl("skills/SpringBoot.png"),
       color: "#6db33f" // Spring green color
     },
     {
       title: "Angular",
-      imageUrl: "/assets/skills/angular.png",
+      imageUrl: getImageUrl("skills/angular.png"),
       color: "#dd0031" // Angular red color
     }
   ];
@@ -66,14 +65,15 @@ export const Experience = () => {
     angular: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/angularjs/angularjs-original.svg"
   };
 
-  // Determine if image exists, otherwise use fallback
   const getSkillIcon = (skill) => {
-    // Map skill title to direct URL key
-    const key = skill.title.toLowerCase().replace(/\s+/g, '');
-    const directKey = key === 'springboot' ? 'spring' : key;
-    
-    // Use direct CDN URL as a fallback
-    return directImageUrls[directKey] || skill.imageUrl;
+    try {
+      return skill.imageUrl;
+    } catch (error) {
+      const key = skill.title.toLowerCase().replace(/\s+/g, '');
+      const directKey = key === 'springboot' ? 'spring' : key;
+      
+      return directImageUrls[directKey] || skill.imageUrl;
+    }
   };
 
   return (
@@ -90,14 +90,11 @@ export const Experience = () => {
                   loading="eager"
                   onError={(e) => {
                     console.log(`Failed to load ${skill.title} icon, trying fallback`);
-                    // Try the direct URL if the asset fails
                     const key = skill.title.toLowerCase().replace(/\s+/g, '');
                     const directKey = key === 'springboot' ? 'spring' : key;
                     e.target.src = directImageUrls[directKey];
                   }}
-                  style={{
-                    filter: "brightness(0) saturate(100%) invert(88%) sepia(61%) saturate(1200%) hue-rotate(140deg) brightness(105%) contrast(101%)"
-                  }}
+                  className={styles.originalColorIcon} 
                 />
               </div>
               <p>{skill.title}</p>
