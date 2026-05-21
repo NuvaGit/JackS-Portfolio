@@ -12,7 +12,15 @@ export const Navbar = () => {
   const location = useLocation();
   
   // Get theme context
-  const { darkMode, toggleDarkMode } = useContext(ThemeContext);
+  const { darkMode, toggleDarkMode, terminalTheme, setTerminalTheme } = useContext(ThemeContext);
+  
+  // Theme cycling
+  const THEMES = ['matrix', 'blue', 'amber'];
+  const themeEmojis = {
+    matrix: '🟢',
+    blue: '🔵',
+    amber: '🟠'
+  };
 
   // Handle sticky navbar and section highlighting on scroll
   useEffect(() => {
@@ -109,7 +117,10 @@ export const Navbar = () => {
   // Direct theme toggle handler
   const handleThemeToggle = (e) => {
     e.preventDefault();
-    toggleDarkMode();
+    const currentIndex = THEMES.indexOf(terminalTheme);
+    const nextIndex = (currentIndex + 1) % THEMES.length;
+    const nextTheme = THEMES[nextIndex];
+    setTerminalTheme(nextTheme);
   };
 
   return (
@@ -206,9 +217,10 @@ export const Navbar = () => {
               <button 
                 onClick={handleThemeToggle}
                 className={styles.themeSwitcher}
-                aria-label={darkMode ? "Switch to light mode" : "Switch to dark mode"}
+                aria-label="Cycle theme"
+                title="Cycle through themes: matrix → blue → amber"
               >
-                <span className={styles.switchIcon}>{darkMode ? '☀️' : '🌙'}</span>
+                <span className={styles.switchIcon}>{themeEmojis[terminalTheme]}</span>
               </button>
             </li>
           </ul>
