@@ -11,11 +11,11 @@ export const Hero = () => {
   
   // Array of tech roles/descriptions to cycle through
   const techRoles = [
-    "University student set to graduate in 2025",
+    "AI Engineer at FNZ",
     "Full Stack Developer", 
-    "Blockchain Enthusiast",
-    "ML & AI Explorer",
-    "looking for work in the FinTech space"
+    "Finance Tech Specialist",
+    "C# & .NET Expert",
+    "3D Graphics Enthusiast"
   ];
   
   // Handle the typing animation effect
@@ -180,15 +180,15 @@ export const Hero = () => {
         <div className={styles.stats}>
           <div className={styles.statItem}>
             <span className={styles.statLabel}>Experience</span>
-            <span className={styles.statValue}>3+ years</span>
+            <span className={styles.statValue}>4+ years</span>
           </div>
           <div className={styles.statItem}>
             <span className={styles.statLabel}>Projects</span>
-            <span className={styles.statValue}>12+</span>
+            <span className={styles.statValue}>15+</span>
           </div>
           <div className={styles.statItem}>
             <span className={styles.statLabel}>Technologies</span>
-            <span className={styles.statValue}>15+</span>
+            <span className={styles.statValue}>20+</span>
           </div>
         </div>
       </div>
