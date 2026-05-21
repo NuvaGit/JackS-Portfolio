@@ -17,7 +17,6 @@
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  transition: all 0.3s ease-in-out;
 }
 
 .terminal-header {
@@ -121,7 +120,6 @@
   z-index: 10;
   font-weight: normal;
   word-break: break-word;
-  transition: all 0.3s ease;
   padding: 2px 0;
   /* Prevent layout shifts with fixed line height */
   min-height: 1.4em;
@@ -134,7 +132,6 @@
 .terminal-line:hover {
   background-color: rgba(0, 255, 0, 0.1);
   text-shadow: 0 0 8px rgba(0, 255, 0, 0.8);
-  transform: translateX(2px);
 }
 
 /* Special styling for ASCII art */
@@ -162,10 +159,11 @@
 .current-line {
   display: flex;
   align-items: center;
-  /* Fixed height to prevent layout shifts */
+  /* Use min-height only to prevent layout shifts */
   min-height: 1.4em;
-  height: 1.4em;
   width: 100%;
+  white-space: pre-wrap;
+  word-break: break-word;
 }
 
 .prompt-text {
@@ -270,50 +268,16 @@
   border-radius: 4px;
 }
 
-/* Terminal footer with theme switcher and skip button */
+/* Terminal footer with skip button */
 .terminal-footer {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   align-items: center;
   padding: 10px 20px;
   background-color: var(--terminal-bg);
   border-top: 1px solid var(--terminal-secondary);
   height: 50px; /* Fixed height to prevent layout shifts */
   box-sizing: border-box;
-}
-
-.theme-buttons {
-  display: flex;
-  gap: 10px;
-}
-
-.theme-btn {
-  width: 24px;
-  height: 24px;
-  border-radius: 50%;
-  border: 2px solid #222;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.theme-btn:hover {
-  transform: scale(1.2);
-  box-shadow: 0 0 10px currentColor;
-}
-
-.matrix-theme {
-  background-color: #00ff00;
-  border-color: #00aa00;
-}
-
-.blue-theme {
-  background-color: #00ccff;
-  border-color: #0077cc;
-}
-
-.amber-theme {
-  background-color: #ffaa00;
-  border-color: #cc7700;
 }
 
 .skip-button {

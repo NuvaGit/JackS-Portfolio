@@ -1,12 +1,16 @@
 :root {
   --color-text: #ffffff;        
   --color-primary: #00ff00;     
-  --color-secondary: #00cc00;   
+  --color-secondary: #00aa00;   
   --color-dark: #003300;        
   --color-bg: #000000;          
   --color-bg-secondary: #0a0a0a; 
   --color-highlight: #00ff33;   
-  --color-shadow: #003300;      
+  --color-shadow: #003300;
+  
+  --terminal-primary: #00ff00;
+  --terminal-secondary: #00aa00;
+  --terminal-bg: rgba(0, 10, 0, 0.95);
 
   --font-roboto: "Roboto", sans-serif;
 }

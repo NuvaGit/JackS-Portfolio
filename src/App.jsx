@@ -11,17 +11,25 @@ import { Game } from "./components/Game/Game";
 import TerminalIntro from "./components/TerminalIntro/TerminalIntro";
 import { ThreejsBackground } from "./components/ThreejsBackground/ThreejsBackground";
 
-// Create a theme context for dark/light mode
+// Create a theme context for dark/light mode and terminal themes
 export const ThemeContext = createContext({
   darkMode: false,
-  toggleDarkMode: () => {}
+  toggleDarkMode: () => {},
+  terminalTheme: 'matrix',
+  setTerminalTheme: () => {}
 });
+
+const TERMINAL_THEMES = ['matrix', 'blue', 'amber'];
 
 function App() {
   const [showIntro, setShowIntro] = useState(true); // Show intro by default
   const [appLoaded, setAppLoaded] = useState(false); // Start with app unloaded
   const [darkMode, setDarkMode] = useState(false);
   const [pageTransition, setPageTransition] = useState(false);
+  const [terminalTheme, setTerminalTheme] = useState(() => {
+    // Load theme from localStorage if available
+    return localStorage.getItem('terminalTheme') || 'matrix';
+  });
   
   // Theme toggler function
   const toggleDarkMode = () => {
@@ -33,6 +41,36 @@ function App() {
       document.documentElement.classList.remove('dark-theme');
     }
   };
+  
+  // Update terminal theme and apply to entire site
+  const updateTerminalTheme = (newTheme) => {
+    if (TERMINAL_THEMES.includes(newTheme)) {
+      setTerminalTheme(newTheme);
+      localStorage.setItem('terminalTheme', newTheme);
+      applyThemeToSite(newTheme);
+    }
+  };
+  
+  // Apply theme colors to the entire site
+  const applyThemeToSite = (theme) => {
+    const themeColors = {
+      matrix: { primary: '#00ff00', secondary: '#00aa00', bg: 'rgba(0, 10, 0, 0.95)' },
+      blue: { primary: '#00ccff', secondary: '#0077cc', bg: 'rgba(0, 10, 30, 0.95)' },
+      amber: { primary: '#ffaa00', secondary: '#cc7700', bg: 'rgba(30, 10, 0, 0.95)' },
+    };
+    
+    const colors = themeColors[theme];
+    document.documentElement.style.setProperty('--color-primary', colors.primary);
+    document.documentElement.style.setProperty('--color-secondary', colors.secondary);
+    document.documentElement.style.setProperty('--terminal-primary', colors.primary);
+    document.documentElement.style.setProperty('--terminal-secondary', colors.secondary);
+    document.documentElement.style.setProperty('--terminal-bg', colors.bg);
+  };
+  
+  // Apply theme on mount
+  useEffect(() => {
+    applyThemeToSite(terminalTheme);
+  }, [terminalTheme]);
   
   // Initialize animations
   useEffect(() => {
@@ -115,7 +153,7 @@ function App() {
   };
 
   return (
-    <ThemeContext.Provider value={{ darkMode, toggleDarkMode }}>
+    <ThemeContext.Provider value={{ darkMode, toggleDarkMode, terminalTheme, setTerminalTheme: updateTerminalTheme }}>
       <Router>
         <div className={`${styles.appWrapper} ${darkMode ? styles.darkMode : ''}`}>
           {showIntro && <TerminalIntro onComplete={handleIntroComplete} />}

@@ -1,8 +1,10 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { ThemeContext } from '../../App';
 import './TerminalIntro.css';
 
 const TerminalIntro = ({ onComplete }) => {
+  const { terminalTheme, setTerminalTheme } = useContext(ThemeContext);
   const [lines, setLines] = useState([]);
   const [currentLine, setCurrentLine] = useState('');
   const [userInput, setUserInput] = useState('');
@@ -14,7 +16,6 @@ const TerminalIntro = ({ onComplete }) => {
   const [historyIndex, setHistoryIndex] = useState(-1);
   const [terminalBooted, setTerminalBooted] = useState(false);
   const [inputLocked, setInputLocked] = useState(true);
-  const [terminalTheme, setTerminalTheme] = useState('matrix'); // 'matrix', 'blue', 'amber'
   const terminalRef = useRef(null);
   const inputRef = useRef(null);
   const navigate = useNavigate();
@@ -181,16 +182,20 @@ const TerminalIntro = ({ onComplete }) => {
   const changeTheme = (newTheme) => {
     if (themeColors[newTheme]) {
       setTerminalTheme(newTheme);
-      
-      // Apply theme colors to CSS variables
-      document.documentElement.style.setProperty('--terminal-primary', themeColors[newTheme].primary);
-      document.documentElement.style.setProperty('--terminal-secondary', themeColors[newTheme].secondary);
-      document.documentElement.style.setProperty('--terminal-bg', themeColors[newTheme].bg);
-      
-      addLine(`Terminal theme changed to: ${newTheme}`);
+      // No message - just change theme silently
     } else {
       addLine(`Theme not found. Available themes: matrix, blue, amber`);
     }
+  };
+  
+  // Cycle to next theme
+  const cycleTheme = () => {
+    const themes = ['matrix', 'blue', 'amber'];
+    const currentIndex = themes.indexOf(terminalTheme);
+    const nextIndex = (currentIndex + 1) % themes.length;
+    const nextTheme = themes[nextIndex];
+    setTerminalTheme(nextTheme);
+    // No message - theme changes silently
   };
 
   const handleCommand = async (cmd) => {
@@ -482,23 +487,6 @@ const TerminalIntro = ({ onComplete }) => {
       />
       
       <div className="terminal-footer">
-        <div className="theme-buttons">
-          <button 
-            className="theme-btn matrix-theme" 
-            onClick={() => changeTheme('matrix')}
-            aria-label="Matrix theme"
-          ></button>
-          <button 
-            className="theme-btn blue-theme" 
-            onClick={() => changeTheme('blue')}
-            aria-label="Blue theme"
-          ></button>
-          <button 
-            className="theme-btn amber-theme" 
-            onClick={() => changeTheme('amber')}
-            aria-label="Amber theme"
-          ></button>
-        </div>
         <button className="skip-button" onClick={onComplete}>Skip Intro</button>
       </div>
     </div>
