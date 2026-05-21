@@ -9,6 +9,7 @@ import { Navbar } from "./components/Navbar/Navbar";
 import { Projects } from "./components/Projects/Projects";
 import { Game } from "./components/Game/Game";
 import TerminalIntro from "./components/TerminalIntro/TerminalIntro";
+import { ThreejsBackground } from "./components/ThreejsBackground/ThreejsBackground";
 
 // Create a theme context for dark/light mode
 export const ThemeContext = createContext({
@@ -118,6 +119,8 @@ function App() {
       <Router>
         <div className={`${styles.appWrapper} ${darkMode ? styles.darkMode : ''}`}>
           {showIntro && <TerminalIntro onComplete={handleIntroComplete} />}
+          
+          <ThreejsBackground />
           
           <div className={`${styles.pageTransition} ${pageTransition ? styles.pageTransitionActive : ''}`}></div>
           

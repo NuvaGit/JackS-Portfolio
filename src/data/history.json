@@ -1,19 +1,28 @@
 [
   {
-    "role": "Freelance VFX Aritst",
-    "organisation": "Self Employed",
-    "startDate": "2018",
-    "endDate": "2020",
-    "experiences": ["Created engaging thumbnails", "Edited videos with Adobe After Effects"],
-    "imageSrc": ""
-  }, 
+    "role": "Associate AI Engineer",
+    "organisation": "FNZ Brno",
+    "startDate": "April, 2026",
+    "endDate": "Present",
+    "experiences": [
+      "Developing enterprise financial solutions using .NET framework and C#",
+      "Designing and building AI agents in C++ for intelligent financial advisor platform",
+      "Building RESTful APIs and microservices for high-volume financial transaction processing",
+      "Working with SQL Server databases and Entity Framework"
+    ],
+    "imageSrc": "history/fnz.png"
+  },
   {
-    "role": "ICT Intern",
-    "organisation": "Kerry Group",
-    "startDate": "May, 2023",
-    "endDate": "Aug, 2023",
-    "experiences": ["Worked with PHP", "Designed login portals"],
-    "imageSrc": "history/kerrygroup.png"
+    "role": "Technology Solutions Graduate",
+    "organisation": "FNZ Brno",
+    "startDate": "August, 2025",
+    "endDate": "April, 2026",
+    "experiences": [
+      "Completed 5 immersions across Delivery Management, QA Testing, Development, AI Engineering, and Production Support",
+      "Gained end-to-end exposure to fintech software lifecycle",
+      "Contributed to .NET-based wealth management platforms and live production environments"
+    ],
+    "imageSrc": "history/fnz.png"
   },
   {
     "role": "Software Enginner Intern",
@@ -25,5 +34,21 @@
       "Helped Create a customer chatbot"
     ],
     "imageSrc": "history/cle1.png"
+  },
+  {
+    "role": "ICT Intern",
+    "organisation": "Kerry Group",
+    "startDate": "May, 2023",
+    "endDate": "Aug, 2023",
+    "experiences": ["Worked with PHP", "Designed login portals"],
+    "imageSrc": "history/kerrygroup.png"
+  },
+  {
+    "role": "Freelance VFX Aritst",
+    "organisation": "Self Employed",
+    "startDate": "2018",
+    "endDate": "2020",
+    "experiences": ["Created engaging thumbnails", "Edited videos with Adobe After Effects"],
+    "imageSrc": ""
   }
 ]

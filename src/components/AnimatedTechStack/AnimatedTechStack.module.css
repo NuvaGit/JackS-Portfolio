@@ -1,0 +1,153 @@
+@import "../../vars.css";
+
+.container {
+  position: relative;
+  width: 100%;
+  height: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.orbit {
+  position: relative;
+  width: 300px;
+  height: 300px;
+  animation: rotate 20s linear infinite;
+}
+
+.item {
+  position: absolute;
+  width: 80px;
+  height: 80px;
+  left: 50%;
+  top: 50%;
+  margin-left: -40px;
+  margin-top: -40px;
+  transform-origin: 0 -150px;
+  transform: rotateZ(calc(360deg / var(--total) * var(--index)));
+  animation: orbitFloat 4s ease-in-out infinite;
+}
+
+.techBubble {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 30, 0, 0.6);
+  border: 2px solid var(--color-primary);
+  border-radius: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  cursor: pointer;
+  transition: all 200ms cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 0 15px rgba(0, 255, 0, 0.3), inset 0 0 10px rgba(0, 255, 0, 0.1);
+}
+
+.techBubble:hover {
+  transform: scale(1.15);
+  box-shadow: 0 0 25px rgba(0, 255, 0, 0.6), inset 0 0 15px rgba(0, 255, 0, 0.2);
+  background: rgba(0, 50, 0, 0.8);
+}
+
+.icon {
+  font-size: 28px;
+  animation: bounce 1s ease-in-out infinite;
+}
+
+.name {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--color-primary);
+  text-align: center;
+  text-shadow: 0 0 5px rgba(0, 255, 0, 0.7);
+}
+
+.center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 60px;
+  height: 60px;
+}
+
+.pulse {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 255, 0, 0.2);
+  border: 2px solid var(--color-primary);
+  border-radius: 50%;
+  animation: corePulse 2s ease-in-out infinite;
+  box-shadow: 0 0 20px rgba(0, 255, 0, 0.5);
+}
+
+@keyframes rotate {
+  from {
+    transform: rotateZ(0deg);
+  }
+  to {
+    transform: rotateZ(360deg);
+  }
+}
+
+@keyframes orbitFloat {
+  0%, 100% {
+    transform: rotateZ(calc(360deg / var(--total) * var(--index))) translateY(-150px);
+  }
+  50% {
+    transform: rotateZ(calc(360deg / var(--total) * var(--index))) translateY(-130px);
+  }
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+@keyframes corePulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.3;
+  }
+  50% {
+    transform: scale(1.2);
+    opacity: 0.6;
+  }
+}
+
+@media screen and (max-width: 830px) {
+  .container {
+    height: 250px;
+  }
+  
+  .orbit {
+    width: 220px;
+    height: 220px;
+  }
+  
+  .item {
+    transform-origin: 0 -110px;
+  }
+  
+  .techBubble {
+    width: 70px;
+    height: 70px;
+  }
+  
+  .icon {
+    font-size: 24px;
+  }
+  
+  .name {
+    font-size: 10px;
+  }
+}

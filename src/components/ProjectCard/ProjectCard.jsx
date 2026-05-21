@@ -1,11 +1,7 @@
-import React, { useRef, useState, useEffect } from "react";
+import React, { useEffect, useRef, useState } from 'react';
+import styles from './ProjectCard.module.css';
 
-import styles from "./ProjectCard.module.css";
-import { getImageUrl } from "../../utils";
-
-export const ProjectCard = ({
-  project: { title, imageSrc, description, skills, demo, source, demoText, sourceText },
-}) => {
+export const ProjectCard = ({ project, index }) => {
   const cardRef = useRef(null);
   const [isHovered, setIsHovered] = useState(false);
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
@@ -20,10 +16,11 @@ export const ProjectCard = ({
       
       setMousePos({ x, y });
       
-      const xRotation = (y - rect.height / 2) / 15;
-      const yRotation = -(x - rect.width / 2) / 15;
+      // Apply perspective effect
+      const xRotation = (y - rect.height / 2) / 10;
+      const yRotation = -(x - rect.width / 2) / 10;
       
-      cardRef.current.style.transform = `perspective(1000px) rotateX(${xRotation}deg) rotateY(${yRotation}deg) scale(1.02)`;
+      cardRef.current.style.transform = `perspective(1000px) rotateX(${xRotation}deg) rotateY(${yRotation}deg) scale(1.05)`;
     };
 
     if (isHovered) {
@@ -47,9 +44,9 @@ export const ProjectCard = ({
   };
 
   return (
-    <div 
+    <div
       ref={cardRef}
-      className={styles.container}
+      className={styles.card}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
       style={{
@@ -61,33 +58,25 @@ export const ProjectCard = ({
         style={{
           left: `${mousePos.x}px`,
           top: `${mousePos.y}px`,
-          opacity: isHovered ? 0.4 : 0
+          opacity: isHovered ? 0.5 : 0
         }}
       />
       
-      <img
-        src={getImageUrl(imageSrc)}
-        alt={`Image of ${title}`}
-        className={styles.image}
-      />
-      <h3 className={styles.title}>{title}</h3>
-      <p className={styles.description}>{description}</p>
-      <ul className={styles.skills}>
-        {skills.map((skill, id) => {
-          return (
-            <li key={id} className={styles.skill}>
-              {skill}
-            </li>
-          );
-        })}
-      </ul>
-      <div className={styles.links}>
-        <a href={demo} className={styles.link}>
-          {demoText || "Demo"}
-        </a>
-        <a href={source} className={styles.link}>
-          {sourceText || "Source"}
-        </a>
+      <div className={styles.content}>
+        <h3 className={styles.title}>{project.name}</h3>
+        <p className={styles.description}>{project.description}</p>
+        
+        <div className={styles.tags}>
+          {project.tech && project.tech.map((tech, i) => (
+            <span key={i} className={styles.tag}>{tech}</span>
+          ))}
+        </div>
+        
+        {project.link && (
+          <a href={project.link} target="_blank" rel="noopener noreferrer" className={styles.link}>
+            View Project →
+          </a>
+        )}
       </div>
       
       <div className={styles.border} />
